@@ -192,7 +192,7 @@ static BOOL isLowContrast = YTMU(@"YTMUltimateIsEnabled") && YTMU(@"lowContrast"
 
 #pragma mark - Low contrast mode
 %hook UIColor
-+ (UIColor *)whiteColor {
+- (UIColor *)whiteColor {
     return isLowContrast ? [UIColor colorWithWhite:0.565 alpha:1] : %orig;
 }
 %end
