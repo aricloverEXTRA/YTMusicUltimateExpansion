@@ -199,17 +199,17 @@ static BOOL isLowContrast() {
 %end
 
 #pragma mark - Low contrast mode
-%hook YTCommonColorPalette
-- (UIColor *)textPrimary { 
-    return isLowContrast() ? [UIColor colorWithWhite:0.565 alpha:1] : %orig;
-}
-- (UIColor *)textSecondary { 
+%hook UIColor
+- (UIColor *)whiteColor {
     return isLowContrast() ? [UIColor colorWithWhite:0.565 alpha:1] : %orig;
 }
 %end
 
-%hook UIColor
-+ (UIColor *)whiteColor {
-    return isLowContrast() ? [UIColor colorWithWhite:0.565 alpha:1] : %orig;
+%hook YTCommonColorPalette
+- (UIColor *)textPrimary { 
+    return isLowContrast() ? [UIColor whiteColor] : %orig;
+}
+- (UIColor *)textSecondary { 
+    return isLowContrast() ? [UIColor whiteColor] : %orig; 
 }
 %end
